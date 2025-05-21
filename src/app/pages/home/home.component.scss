@@ -1,0 +1,79 @@
+
+
+
+/* Hero Section */
+.hero {
+    background: url('/assets/solar-bg.jpg') center/cover no-repeat;
+    background-size: cover;
+    padding: 6rem 2rem;
+    color: #fff;
+    text-align: center;
+  
+    .cta-buttons {
+      margin-top: 2rem;
+  
+      .btn {
+        background: #fbc02d;
+        color: #000;
+        padding: 1rem 2rem;
+        margin: 0 1rem;
+        border-radius: 5px;
+        text-decoration: none;
+  
+        &.btn-secondary {
+          background: #fff;
+          color: #003366;
+        }
+      }
+    }
+  }
+  
+  /* Section padrão */
+  .section {
+    padding: 4rem 2rem;
+    max-width: 960px;
+    margin: auto;
+  
+    h3 {
+      color: #003366;
+    }
+  
+    ul,
+    ol {
+      padding-left: 1.5rem;
+    }
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 3rem 1rem;
+  
+      h2 {
+        font-size: 2rem;
+      }
+  
+      .cta-buttons .btn {
+        font-size: 0.9rem;
+        padding: 0.8rem 1.5rem;
+      }
+    }
+  
+    .section {
+      padding: 2rem 1rem;
+    }
+  }
+  
+  /* Footer */
+  .footer {
+    background: #003366;
+    color: #fff;
+    text-align: center;
+    padding: 2rem;
+  
+    a {
+      color: #fbc02d;
+      margin: 0 0.5rem;
+      text-decoration: none;
+    }
+  }

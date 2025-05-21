@@ -1,0 +1,23 @@
+.layout-header {
+    background-color: #004d40;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .layout-header nav a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+  }
+  .layout-main {
+    padding: 30px;
+  }
+  .layout-footer {
+    background-color: #263238;
+    color: white;
+    text-align: center;
+    padding: 20px;
+  }
+  

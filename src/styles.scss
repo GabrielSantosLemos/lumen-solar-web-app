@@ -1,1 +1,85 @@
-/* You can add global styles to this file, and also import other style files */
+// Cores logo
+
+:root {
+  --light-color: #f5f5f5;
+  --border-color-bt: #dee2e6;
+  --primary-color-verde-escuro: #1f834f;
+  --primary-color-verde-claro: #88bf32;
+  --primary-color-amarelo: #fdb81a;
+  --primary-color-azul-claro: #016caf;
+  --primary-color-azul-escuro: #00245b;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light-color);
+  color: #333;
+}
+
+.banner-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("/assets/images/banner.webp");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 120px 0;
+  position: relative;
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  color: var(--primary-color-verde-escuro);
+  margin-bottom: 1rem;
+}
+
+.stats-section {
+  padding: 60px 0;
+  border-bottom: 1px solid;
+  border-top: 1px solid;
+  border-color: var(--border-color-bt);
+}
+
+.stat-numero {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary-color-amarelo);
+}
+
+footer {
+  border-top: 1px solid var(--border-color-bt);
+  padding: 60px 0 20px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.social-icon {
+  font-size: 1.5rem;
+  margin-right: 15px;
+  transition: color 0.3s;
+}
+
+.impacto-numero {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color-verde-escuro);
+}
+
+.impacto-texto {
+  font-size: 1rem;
+  color: var(--primary-color-verde-escuro);
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import "bootstrap/scss/bootstrap";

@@ -1,0 +1,33 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Responsável</th>
+      <th scope="col">CPF</th>
+      <th scope="col">Renda Familiar</th>
+      <th scope="col">Moradores</th>
+      <th scope="col">Gasto com Energia</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let familia of familias; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ familia.nomeResponsavel }}</td>
+      <td>{{ familia.cpf }}</td>
+      <td>{{ familia.rendaFamilias | currency : "BRL" }}</td>
+      <td>{{ familia.numeroMoradores }}</td>
+      <td>{{ familia.gastoEnergia | currency : "BRL" }}</td>
+      <td>
+        <span
+          [ngClass]="{
+            'text-success': familia.status === 1,
+            'text-danger': familia.status === 0
+          }"
+        >
+          {{ familia.status === 1 ? "Ativa" : "Inativa" }}
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>

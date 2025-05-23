@@ -1,17 +1,65 @@
-<header class="layout-header">
-    <h1>Lumen Solar</h1>
-    <nav>
-      <a routerLink="/home">Início</a>
-      <a routerLink="/familias">Famílias</a>
-      <a routerLink="/doadores">Doadores</a>
-      <a routerLink="/accounts">Minha Conta</a>
-    </nav>
-  </header>
-  <main class="layout-main">
-    <router-outlet></router-outlet>
-  </main>
-  <footer class="layout-footer">
-    <p>Contato: contato@lumensolar.org.br | (19) 0000-0000</p>
-    <p>Localização: Araras – São Paulo, Brasil</p>
-    <p>Links úteis: <a href="#">Termos de Uso</a> | <a href="#">Política de Privacidade</a></p>
-  </footer>
+<nav class="navbar navbar-expand-lg fixed-top border-bottom">
+  <div class="container">
+    <a class="navbar-brand me-auto" routerLink="/">
+      <img src="assets/images/logo.png" alt="Lumen Solar" height="40" />
+    </a>
+
+    <!-- <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="'.'">Ficha de Inscrição</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'.'">Situação do Auxílio</a>
+      </li>
+    </ul> -->
+
+    <button class="btn btn-primary me-2" type="button" (click)="login()">
+      <i class="fas fa-hand-holding-heart me-2"></i> Faça sua Doação
+    </button>
+    <!--
+    <button class="btn border me-2" type="button" (click)="login()">
+      Sair
+    </button> -->
+  </div>
+</nav>
+<div style="height: 67px"></div>
+
+<router-outlet></router-outlet>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <img
+          src="assets/images/logo.png"
+          class="mb-4"
+          alt="Lumen Solar"
+          height="40"
+        />
+        <p>
+          Reduzindo desigualdades energéticas e promovendo inclusão social
+          através da energia limpa.
+        </p>
+        <p class="mb-0 small">
+          &copy; 2023 Lumen Solar. Todos os direitos reservados.
+        </p>
+        <div class="mt-4">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="mb-4">Legal</h5>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a routerLink="/termos-de-uso">Termos de Uso</a></li>
+          <li class="mb-2">
+            <a routerLink="/politica-de-privacidade">Política de Privacidade</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

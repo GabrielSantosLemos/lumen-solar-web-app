@@ -1,1 +1,29 @@
-<p>familias works!</p>
+<div class="container">
+  <div class="mb-4">
+    <h3>Família</h3>
+    <div>Nome responsável</div>
+  </div>
+  <nav ngbNav #nav="ngbNav" class="nav-tabs" [activeId]="1">
+    <ng-container ngbNavItem [ngbNavItem]="0">
+      <button ngbNavLink>Ficha de Inscrição</button>
+      <ng-template ngbNavContent>
+        <app-editar></app-editar>
+      </ng-template>
+    </ng-container>
+    <ng-container ngbNavItem [ngbNavItem]="1">
+      <a ngbNavLink>Situação do Auxílio</a>
+      <ng-template ngbNavContent>
+        <div>CPF: 9999999999</div>
+        <div>Renda Familias: 1200,00</div>
+        <div>Número de Moradores: 8</div>
+        <div>Gasto com Energia (R$): 200,80</div>
+        <div>
+          Status:
+          <span class="badge rounded-pill text-bg-warning">Em Análise</span>
+        </div>
+      </ng-template>
+    </ng-container>
+  </nav>
+
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>

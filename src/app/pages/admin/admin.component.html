@@ -1,0 +1,15 @@
+<div class="container">
+  <h3 class="mb-4">Admin</h3>
+  <nav ngbNav #nav="ngbNav" class="nav-tabs">
+    <ng-container ngbNavItem>
+      <button ngbNavLink>Doadores</button>
+      <ng-template ngbNavContent> <app-doadores></app-doadores> </ng-template>
+    </ng-container>
+    <ng-container ngbNavItem>
+      <a ngbNavLink>Famílias</a>
+      <ng-template ngbNavContent> <app-familias></app-familias> </ng-template>
+    </ng-container>
+  </nav>
+
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>

@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="mb-4">
+    <h3>Doador</h3>
+    <div>Nome doador</div>
+  </div>
+  <nav ngbNav #nav="ngbNav" class="nav-tabs" [activeId]="1">
+    <ng-container ngbNavItem [ngbNavItem]="0">
+      <button ngbNavLink>Informações de Cadastro</button>
+      <ng-template ngbNavContent>
+        <app-editar></app-editar>
+      </ng-template>
+    </ng-container>
+    <ng-container ngbNavItem [ngbNavItem]="1">
+      <a ngbNavLink>Doações</a>
+      <ng-template ngbNavContent> <app-doacoes></app-doacoes> </ng-template>
+    </ng-container>
+  </nav>
+
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>

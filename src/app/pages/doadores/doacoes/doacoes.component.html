@@ -1,0 +1,16 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Valor</th>
+      <th scope="col">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let doacao of doacoes; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ doacao.valor | currency }}</td>
+      <td>{{ doacao.data | date }}</td>
+    </tr>
+  </tbody>
+</table>

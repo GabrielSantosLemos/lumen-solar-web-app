@@ -47,7 +47,7 @@ export class HomeComponent {
       map: worldMap,
     },
     title: {
-      text: 'Índice famílias classificasas por estato',
+      text: 'Contas pagas por estato',
     },
     mapNavigation: {
       enabled: true,

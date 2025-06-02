@@ -3,16 +3,17 @@
     <div class="col-sm-12 col-md-6">
       <input
         type="text"
-        formControlName="nome"
+        formControlName="nomeResponsavel"
         class="form-control mb-3"
         placeholder="Nome do Responsável"
         [class.is-invalid]="
-          form.get('nome')?.touched && form.get('nome')?.invalid
+          form.get('nomeResponsavel')?.touched &&
+          form.get('nomeResponsavel')?.invalid
         "
       />
       <div
         class="invalid-feedback"
-        *ngIf="form.get('nome')?.errors?.['required']"
+        *ngIf="form.get('nomeResponsavel')?.errors?.['required']"
       >
         Nome é obrigatório.
       </div>
@@ -61,23 +62,23 @@
     <div class="col-sm-12 col-md-6">
       <input
         type="tel"
-        formControlName="telefone"
+        formControlName="celular"
         class="form-control mb-3"
-        placeholder="Telefone"
+        placeholder="Celular"
         [class.is-invalid]="
-          form.get('telefone')?.touched && form.get('telefone')?.invalid
+          form.get('celular')?.touched && form.get('celular')?.invalid
         "
       />
       <div
         class="invalid-feedback"
-        *ngIf="form.get('telefone')?.errors?.['required']"
+        *ngIf="form.get('celular')?.errors?.['required']"
       >
-        Telefone é obrigatório.
+        Celular é obrigatório.
       </div>
     </div>
   </div>
 
-  <input
+  <!-- <input
     type="text"
     formControlName="endereco"
     class="form-control mb-3"
@@ -91,42 +92,46 @@
     *ngIf="form.get('endereco')?.errors?.['required']"
   >
     Endereço é obrigatório.
-  </div>
+  </div> -->
 
   <div class="row">
     <div class="col-sm-12 col-md-4">
       <input
         type="number"
-        formControlName="renda"
+        formControlName="rendaFamiliar"
         class="form-control mb-3"
         placeholder="Renda Familiar (R$)"
         [class.is-invalid]="
-          form.get('renda')?.touched && form.get('renda')?.invalid
+          form.get('rendaFamiliar')?.touched &&
+          form.get('rendaFamiliar')?.invalid
         "
       />
-      <div class="invalid-feedback" *ngIf="form.get('renda')?.errors">
-        <div *ngIf="form.get('renda')?.errors?.['required']">
+      <div class="invalid-feedback" *ngIf="form.get('rendaFamiliar')?.errors">
+        <div *ngIf="form.get('rendaFamiliar')?.errors?.['required']">
           Campo obrigatório.
         </div>
-        <div *ngIf="form.get('renda')?.errors?.['min']">Valor inválido.</div>
+        <div *ngIf="form.get('rendaFamiliar')?.errors?.['min']">
+          Valor inválido.
+        </div>
       </div>
     </div>
 
     <div class="col-sm-12 col-md-4">
       <input
         type="number"
-        formControlName="moradores"
+        formControlName="numeroMoradores"
         class="form-control mb-3"
         placeholder="Número de Moradores"
         [class.is-invalid]="
-          form.get('moradores')?.touched && form.get('moradores')?.invalid
+          form.get('numeroMoradores')?.touched &&
+          form.get('numeroMoradores')?.invalid
         "
       />
-      <div class="invalid-feedback" *ngIf="form.get('moradores')?.errors">
-        <div *ngIf="form.get('moradores')?.errors?.['required']">
+      <div class="invalid-feedback" *ngIf="form.get('numeroMoradores')?.errors">
+        <div *ngIf="form.get('numeroMoradores')?.errors?.['required']">
           Campo obrigatório.
         </div>
-        <div *ngIf="form.get('moradores')?.errors?.['min']">
+        <div *ngIf="form.get('numeroMoradores')?.errors?.['min']">
           Deve ter ao menos 1 morador.
         </div>
       </div>
@@ -135,35 +140,38 @@
     <div class="col-sm-12 col-md-4">
       <input
         type="number"
-        formControlName="energia"
+        formControlName="gastoComEnergia"
         class="form-control mb-3"
         placeholder="Gasto com Energia (R$)"
         [class.is-invalid]="
-          form.get('energia')?.touched && form.get('energia')?.invalid
+          form.get('gastoComEnergia')?.touched &&
+          form.get('gastoComEnergia')?.invalid
         "
       />
-      <div class="invalid-feedback" *ngIf="form.get('energia')?.errors">
-        <div *ngIf="form.get('energia')?.errors?.['required']">
+      <div class="invalid-feedback" *ngIf="form.get('gastoComEnergia')?.errors">
+        <div *ngIf="form.get('gastoComEnergia')?.errors?.['required']">
           Campo obrigatório.
         </div>
-        <div *ngIf="form.get('energia')?.errors?.['min']">Valor inválido.</div>
+        <div *ngIf="form.get('gastoComEnergia')?.errors?.['min']">
+          Valor inválido.
+        </div>
       </div>
     </div>
   </div>
 
   <textarea
     class="form-control mb-3"
-    formControlName="vulnerabilidade"
+    formControlName="situacaoVulnerabilidade"
     placeholder="Situação de Vulnerabilidade"
     [class.is-invalid]="
-      form.get('vulnerabilidade')?.touched &&
-      form.get('vulnerabilidade')?.invalid
+      form.get('situacaoVulnerabilidade')?.touched &&
+      form.get('situacaoVulnerabilidade')?.invalid
     "
   ></textarea>
 
   <div
     class="invalid-feedback"
-    *ngIf="form.get('vulnerabilidade')?.errors?.['required']"
+    *ngIf="form.get('situacaoVulnerabilidade')?.errors?.['required']"
   >
     Descreva a situação de vulnerabilidade.
   </div>

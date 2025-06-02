@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Doador } from '../../admin/doadores/doador.model';
+import { environment } from 'src/environments/environment.prod';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-editar',
@@ -7,21 +11,59 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./editar.component.scss'],
 })
 export class EditarComponent {
-  doadorTipo: string = '';
+  readonly baseUrl = environment.baseUrl;
+
+  id = 0;
+  doador: Doador | null = null;
+  doadorTipo = 0;
 
   form = new FormGroup({
-    nome: new FormControl('', Validators.required),
+    nomeCompleto: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
-    telefone: new FormControl(''),
-    cpf: new FormControl('', Validators.required),
-    tipo: new FormControl('', Validators.required),
-    empresa: new FormControl(''),
+    celular: new FormControl(''),
+    tipo: new FormControl(0, Validators.required),
+    cpf: new FormControl(''),
+    nomeEmpresa: new FormControl(''),
     cnpj: new FormControl(''),
   });
 
+  constructor(
+    private _http: HttpClient,
+    private _activateRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    this._activateRoute.params.subscribe((param) => {
+      if (param['id']) {
+        this.id = Number(param['id']);
+        this._http
+          .get<Doador>(`${this.baseUrl}/doadores/${this.id}`)
+          .subscribe({
+            next: (data) => {
+              this.doador = data;
+              this.form.patchValue({
+                nomeCompleto: this.doador.nomeCompleto,
+                email: this.doador.user.email,
+                celular: this.doador.celular,
+                tipo: this.doador.tipo,
+                cpf: this.doador.cpf,
+                nomeEmpresa: this.doador.nomeEmpresa,
+                cnpj: this.doador.cnpj,
+              });
+
+              this.doadorTipo = this.doador.tipo;
+            },
+            error: (error) => {
+              console.error('Erro ao buscar doador:', error);
+            },
+          });
+      }
+    });
+  }
+
   atualizarTipoDoador(event: Event) {
     const value = (event.target as HTMLSelectElement).value;
-    this.doadorTipo = value;
+    this.doadorTipo = Number(value);
   }
 
   onSubmit(): void {
@@ -30,6 +72,8 @@ export class EditarComponent {
       return;
     }
 
-    console.log('Dados do doador:', this.form.value);
+    this._http
+      .put(`${this.baseUrl}/doadores/${this.id}`, this.form.value)
+      .subscribe();
   }
 }

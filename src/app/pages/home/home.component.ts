@@ -3,6 +3,16 @@ import { Component } from '@angular/core';
 import * as Highcharts from 'highcharts/highmaps';
 
 import * as worldMap from '@highcharts/map-collection/countries/br/br-all.geo.json';
+import { environment } from 'src/environments/environment.prod';
+import { HttpClient } from '@angular/common/http';
+
+export interface Dashboard {
+  totalFamiliasAjudadas: number;
+  totalPlacasSolaresAdquiridas: number;
+  totalValorDoacaoRecebidas: number;
+  totalValorContasPagas: number;
+  contasPagasPorEstado: { uf: string; valorTotal: number }[];
+}
 
 @Component({
   selector: 'app-home',
@@ -10,36 +20,37 @@ import * as worldMap from '@highcharts/map-collection/countries/br/br-all.geo.js
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
+  chartInstance: Highcharts.Chart | null = null;
   Highcharts: typeof Highcharts = Highcharts;
   chartConstructor = 'mapChart';
   data: [string, number][] = [
-    ['br-sp', 10],
-    ['br-ma', 11],
-    ['br-pa', 12],
-    ['br-sc', 13],
-    ['br-ba', 14],
-    ['br-ap', 15],
-    ['br-ms', 16],
-    ['br-mg', 17],
-    ['br-go', 18],
-    ['br-rs', 19],
-    ['br-to', 20],
-    ['br-pi', 21],
-    ['br-al', 22],
-    ['br-pb', 23],
-    ['br-ce', 24],
-    ['br-se', 25],
-    ['br-rr', 26],
-    ['br-pe', 27],
-    ['br-pr', 28],
-    ['br-es', 29],
-    ['br-rj', 30],
-    ['br-rn', 31],
-    ['br-am', 32],
-    ['br-mt', 33],
-    ['br-df', 34],
-    ['br-ac', 35],
-    ['br-ro', 36],
+    ['br-sp', 0],
+    ['br-ma', 0],
+    ['br-pa', 0],
+    ['br-sc', 0],
+    ['br-ba', 0],
+    ['br-ap', 0],
+    ['br-ms', 0],
+    ['br-mg', 0],
+    ['br-go', 0],
+    ['br-rs', 0],
+    ['br-to', 0],
+    ['br-pi', 0],
+    ['br-al', 0],
+    ['br-pb', 0],
+    ['br-ce', 0],
+    ['br-se', 0],
+    ['br-rr', 0],
+    ['br-pe', 0],
+    ['br-pr', 0],
+    ['br-es', 0],
+    ['br-rj', 0],
+    ['br-rn', 0],
+    ['br-am', 0],
+    ['br-mt', 0],
+    ['br-df', 0],
+    ['br-ac', 0],
+    ['br-ro', 0],
   ];
 
   chartOptions: Highcharts.Options = {
@@ -84,4 +95,37 @@ export class HomeComponent {
       },
     ],
   };
+
+  readonly baseUrl = environment.baseUrl;
+
+  dashboard: Dashboard | null = null;
+
+  constructor(private _http: HttpClient) {}
+
+  ngOnInit() {
+    this._http.get<Dashboard>(`${this.baseUrl}/dashboards`).subscribe({
+      next: (data) => {
+        this.dashboard = data;
+        debugger;
+
+        // Atualiza apenas os valores informados pela API, mantendo os demais com valor 0
+        const mapaValores = new Map(
+          data.contasPagasPorEstado.map((item) => [
+            item.uf.toLowerCase(),
+            item.valorTotal,
+          ])
+        );
+
+        this.data = this.data.map(([uf, _]) => [uf, mapaValores.get(uf) ?? 0]);
+
+        if (this.chartInstance) {
+          const series = this.chartInstance.series[0];
+          series.setData(this.data, true); // true para forçar redraw
+        }
+      },
+      error: (error) => {
+        console.error('Erro ao carregar dashboard:', error);
+      },
+    });
+  }
 }

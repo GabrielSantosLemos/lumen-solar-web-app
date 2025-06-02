@@ -1,9 +1,15 @@
 export interface Familia {
   id: number;
-  nomeResponsavel: number;
+  nomeResponsavel: string;
   cpf: string;
-  rendaFamilias: number;
+  celular: string;
+  rendaFamiliar: number;
   numeroMoradores: number;
-  gastoEnergia: number;
+  gastoComEnergia: number;
+  situacaoVulnerabilidade: string;
   status: number;
+
+  user: {
+    email: string;
+  };
 }

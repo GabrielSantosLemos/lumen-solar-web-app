@@ -32,7 +32,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'doadores',
+    path: 'doadores/:id',
     component: LayoutComponent,
     loadChildren: () =>
       import('../app/pages/doadores/doadores.module').then(
@@ -40,7 +40,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'familias',
+    path: 'familias/:id',
     component: LayoutComponent,
     loadChildren: () =>
       import('../app/pages/familias/familias.module').then(

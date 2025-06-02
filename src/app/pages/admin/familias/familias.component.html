@@ -15,9 +15,9 @@
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ familia.nomeResponsavel }}</td>
       <td>{{ familia.cpf }}</td>
-      <td>{{ familia.rendaFamilias | currency : "BRL" }}</td>
+      <td>{{ familia.rendaFamiliar | currency : "BRL" }}</td>
       <td>{{ familia.numeroMoradores }}</td>
-      <td>{{ familia.gastoEnergia | currency : "BRL" }}</td>
+      <td>{{ familia.gastoComEnergia | currency : "BRL" }}</td>
       <td>
         <span
           [ngClass]="{

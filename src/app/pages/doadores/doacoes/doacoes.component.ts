@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Doacao } from '../../admin/doadores/doador.model';
+import { environment } from 'src/environments/environment.prod';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DoarComponent } from './doar/doar.component';
 
 @Component({
   selector: 'app-doacoes',
@@ -6,14 +12,51 @@ import { Component } from '@angular/core';
   styleUrls: ['./doacoes.component.scss'],
 })
 export class DoacoesComponent {
-  doacoes: { id: number; valor: number; data: Date }[] = [
-    { id: 1, valor: 100, data: new Date('2025-01-15') },
-    { id: 2, valor: 50, data: new Date('2025-02-10') },
-    { id: 3, valor: 75.5, data: new Date('2025-02-28') },
-    { id: 4, valor: 200, data: new Date('2025-03-12') },
-    { id: 5, valor: 30, data: new Date('2025-03-27') },
-    { id: 6, valor: 120, data: new Date('2025-04-05') },
-    { id: 7, valor: 90, data: new Date('2025-04-22') },
-    { id: 8, valor: 150, data: new Date('2025-05-20') },
-  ];
+  readonly baseUrl = environment.baseUrl;
+  private modalService = inject(NgbModal);
+
+  doacoes: Doacao[] = [];
+  id = 0;
+
+  constructor(
+    private _http: HttpClient,
+    private _activateRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    this._activateRoute.params.subscribe((param) => {
+      if (param['id']) {
+        this.id = Number(param['id']);
+        this.atualizar();
+      }
+    });
+  }
+
+  doar() {
+    const modalRef = this.modalService.open(DoarComponent, {
+      centered: true,
+      size: 'lg',
+      backdrop: 'static',
+      animation: true,
+    });
+
+    modalRef.componentInstance.doadorId = this.id;
+
+    modalRef.result.then(() => {
+      this.atualizar();
+    });
+  }
+
+  atualizar() {
+    this._http
+      .get<Doacao[]>(`${this.baseUrl}/doadores/${this.id}/doacoes`)
+      .subscribe({
+        next: (data) => {
+          this.doacoes = data;
+        },
+        error: (error) => {
+          console.error('Erro ao buscar doador:', error);
+        },
+      });
+  }
 }

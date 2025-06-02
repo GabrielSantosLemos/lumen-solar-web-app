@@ -8,15 +8,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { TermosDeUsoComponent } from './pages/termos-de-uso/termos-de-uso.component';
 import { PoliticaDePrivacidadeComponent } from './pages/politica-de-privacidade/politica-de-privacidade.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, TermosDeUsoComponent, PoliticaDePrivacidadeComponent],
+  declarations: [
+    AppComponent,
+    TermosDeUsoComponent,
+    PoliticaDePrivacidadeComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
     NgbModule,
     HighchartsChartModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

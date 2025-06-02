@@ -5,15 +5,22 @@ import { DoadoresRoutingModule } from './doadores-routing.module';
 import { DoadoresComponent } from './doadores.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditarComponent } from './editar/editar.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DoacoesComponent } from './doacoes/doacoes.component';
+import { DoarComponent } from './doacoes/doar/doar.component';
 
 @NgModule({
-  declarations: [DoadoresComponent, EditarComponent, DoacoesComponent],
+  declarations: [
+    DoadoresComponent,
+    EditarComponent,
+    DoacoesComponent,
+    DoarComponent,
+  ],
   imports: [
     CommonModule,
     DoadoresRoutingModule,
     NgbModule,
+    FormsModule,
     ReactiveFormsModule,
   ],
 })

@@ -104,13 +104,10 @@ export class HomeComponent {
 
   ngOnInit() {
     this._http.get<Dashboard>(`${this.baseUrl}/dashboards`).subscribe({
-      next: (data) => {
+      next: data => {
         this.dashboard = data;
-        debugger;
-
-        // Atualiza apenas os valores informados pela API, mantendo os demais com valor 0
         const mapaValores = new Map(
-          data.contasPagasPorEstado.map((item) => [
+          data.contasPagasPorEstado.map(item => [
             item.uf.toLowerCase(),
             item.valorTotal,
           ])
@@ -120,10 +117,10 @@ export class HomeComponent {
 
         if (this.chartInstance) {
           const series = this.chartInstance.series[0];
-          series.setData(this.data, true); // true para forçar redraw
+          series.setData(this.data, true);
         }
       },
-      error: (error) => {
+      error: error => {
         console.error('Erro ao carregar dashboard:', error);
       },
     });

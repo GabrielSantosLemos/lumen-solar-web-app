@@ -3,13 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { TermosDeUsoComponent } from './pages/termos-de-uso/termos-de-uso.component';
 import { PoliticaDePrivacidadeComponent } from './pages/politica-de-privacidade/politica-de-privacidade.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
     loadChildren: () =>
-      import('../app/pages/home/home.module').then((m) => m.HomeModule),
+      import('../app/pages/home/home.module').then(m => m.HomeModule),
   },
   {
     path: 'termos-de-uso',
@@ -34,24 +35,27 @@ const routes: Routes = [
   {
     path: 'doadores/:id',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('../app/pages/doadores/doadores.module').then(
-        (m) => m.DoadoresModule
+        m => m.DoadoresModule
       ),
   },
   {
     path: 'familias/:id',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('../app/pages/familias/familias.module').then(
-        (m) => m.FamíliasModule
+        m => m.FamíliasModule
       ),
   },
   {
     path: 'admin',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     loadChildren: () =>
-      import('../app/pages/admin/admin.module').then((m) => m.AdminModule),
+      import('../app/pages/admin/admin.module').then(m => m.AdminModule),
   },
 ];
 

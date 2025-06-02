@@ -4,8 +4,7 @@
     type="button"
     class="btn-close"
     aria-label="Close"
-    (click)="onFechar()"
-  ></button>
+    (click)="onFechar()"></button>
 </div>
 
 <!-- Tabs -->
@@ -22,8 +21,7 @@
               type="email"
               class="form-control"
               formControlName="email"
-              [class.is-invalid]="email.touched && email.invalid"
-            />
+              [class.is-invalid]="email.touched && email.invalid" />
             <div class="invalid-feedback" *ngIf="email.touched && email.errors">
               <div *ngIf="email.errors['required']">O email é obrigatório.</div>
               <div *ngIf="email.errors['email']">Email inválido.</div>
@@ -37,20 +35,19 @@
               type="password"
               class="form-control"
               formControlName="senha"
-              [class.is-invalid]="senha.touched && senha.invalid"
-            />
+              [class.is-invalid]="senha.touched && senha.invalid" />
             <div class="invalid-feedback" *ngIf="senha.touched && senha.errors">
               <div *ngIf="senha.errors['required']">A senha é obrigatória.</div>
               <div *ngIf="senha.errors['minlength']">
                 A senha deve ter no mínimo
-                {{ senha.errors["minlength"].requiredLength }}
+                {{ senha.errors['minlength'].requiredLength }}
                 caracteres.
               </div>
             </div>
           </div>
 
           <!-- Checkbox -->
-          <div class="mb-3 form-check">
+          <!-- <div class="mb-3 form-check">
             <input
               type="checkbox"
               class="form-check-input"
@@ -58,14 +55,25 @@
               formControlName="lembrar"
             />
             <label class="form-check-label" for="lembrar">Lembrar de mim</label>
-          </div>
+          </div> -->
 
           <!-- Botão -->
           <button type="submit" class="btn btn-primary w-100">Entrar</button>
 
-          <div class="text-center mt-3">
-            <a href="#" class="text-muted">Esqueceu sua senha?</a>
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              padding: 8px;
+              color: rgb(213 39 39);
+            "
+            *ngIf="erro">
+            {{ erro }}
           </div>
+
+          <!-- <div class="text-center mt-3">
+            <a href="#" class="text-muted">Esqueceu sua senha?</a>
+          </div> -->
         </form>
       </ng-template>
     </ng-container>
@@ -81,8 +89,7 @@
                   ? 'btn-primary'
                   : 'btn-outline-primary'
               "
-              (click)="selectForm('donor')"
-            >
+              (click)="selectForm('donor')">
               <i class="fas fa-hand-holding-heart me-2"></i>Quero Doar
             </button>
             <button
@@ -92,8 +99,7 @@
                   ? 'btn-primary'
                   : 'btn-outline-primary'
               "
-              (click)="selectForm('family')"
-            >
+              (click)="selectForm('family')">
               <i class="fas fa-home me-2"></i>Sou Família
             </button>
           </div>
@@ -103,8 +109,7 @@
         <form
           [formGroup]="formDoador"
           (ngSubmit)="onSubmitDoador()"
-          *ngIf="formSelecionado === 'donor'"
-        >
+          *ngIf="formSelecionado === 'donor'">
           <input
             type="text"
             formControlName="nome"
@@ -112,12 +117,10 @@
             placeholder="Nome Completo"
             [class.is-invalid]="
               formDoador.get('nome')?.touched && formDoador.get('nome')?.invalid
-            "
-          />
+            " />
           <div
             class="invalid-feedback"
-            *ngIf="formDoador.get('nome')?.errors?.['required']"
-          >
+            *ngIf="formDoador.get('nome')?.errors?.['required']">
             Nome é obrigatório.
           </div>
 
@@ -129,15 +132,13 @@
             [class.is-invalid]="
               formDoador.get('email')?.touched &&
               formDoador.get('email')?.invalid
-            "
-          />
+            " />
           <div
             class="invalid-feedback"
             *ngIf="
               formDoador.get('email')?.touched &&
               formDoador.get('email')?.errors
-            "
-          >
+            ">
             <div *ngIf="formDoador.get('email')?.errors?.['required']">
               Email é obrigatório.
             </div>
@@ -148,10 +149,9 @@
 
           <input
             type="tel"
-            formControlName="telefone"
+            formControlName="celular"
             class="form-control mb-3"
-            placeholder="Telefone"
-          />
+            placeholder="Celular" />
 
           <input
             type="text"
@@ -160,12 +160,10 @@
             placeholder="CPF"
             [class.is-invalid]="
               formDoador.get('cpf')?.touched && formDoador.get('cpf')?.invalid
-            "
-          />
+            " />
           <div
             class="invalid-feedback"
-            *ngIf="formDoador.get('cpf')?.errors?.['required']"
-          >
+            *ngIf="formDoador.get('cpf')?.errors?.['required']">
             CPF é obrigatório.
           </div>
 
@@ -175,32 +173,28 @@
             (change)="atualizarTipoDoador($event)"
             [class.is-invalid]="
               formDoador.get('tipo')?.touched && formDoador.get('tipo')?.invalid
-            "
-          >
-            <option value="" disabled selected>Tipo de Doador</option>
-            <option value="individual">Pessoa Física</option>
-            <option value="company">Pessoa Jurídica</option>
+            ">
+            <option [value]="null" disabled selected>Tipo de Doador</option>
+            <option [value]="1">Pessoa Física</option>
+            <option [value]="2">Pessoa Jurídica</option>
           </select>
           <div
             class="invalid-feedback"
-            *ngIf="formDoador.get('tipo')?.errors?.['required']"
-          >
+            *ngIf="formDoador.get('tipo')?.errors?.['required']">
             Tipo de doador é obrigatório.
           </div>
 
-          <div *ngIf="doadorTipo === 'company'">
+          <div *ngIf="doadorTipo === 2">
             <input
               type="text"
               formControlName="empresa"
               class="form-control mb-3"
-              placeholder="Nome da Empresa"
-            />
+              placeholder="Nome da Empresa" />
             <input
               type="text"
               formControlName="cnpj"
               class="form-control mb-3"
-              placeholder="CNPJ"
-            />
+              placeholder="CNPJ" />
           </div>
 
           <input
@@ -211,8 +205,7 @@
             [class.is-invalid]="
               formDoador.get('senha')?.touched &&
               formDoador.get('senha')?.invalid
-            "
-          />
+            " />
           <div class="invalid-feedback" *ngIf="formDoador.get('senha')?.errors">
             <div *ngIf="formDoador.get('senha')?.errors?.['required']">
               Senha é obrigatória.
@@ -232,12 +225,10 @@
             [class.is-invalid]="
               formDoador.get('confirmarSenha')?.touched &&
               formDoador.get('confirmarSenha')?.invalid
-            "
-          />
+            " />
           <div
             class="invalid-feedback"
-            *ngIf="formDoador.get('confirmarSenha')?.errors?.['required']"
-          >
+            *ngIf="formDoador.get('confirmarSenha')?.errors?.['required']">
             Confirmação obrigatória.
           </div>
 
@@ -246,8 +237,7 @@
               type="checkbox"
               class="form-check-input"
               formControlName="termos"
-              id="termos"
-            />
+              id="termos" />
             <label class="form-check-label" for="termos">
               Concordo com os Termos
             </label>
@@ -256,8 +246,7 @@
               *ngIf="
                 formDoador.get('termos')?.touched &&
                 formDoador.get('termos')?.invalid
-              "
-            >
+              ">
               Você precisa aceitar os termos.
             </div>
           </div>
@@ -271,8 +260,7 @@
         <form
           [formGroup]="formFamilia"
           (ngSubmit)="onSubmitFamilia()"
-          *ngIf="formSelecionado === 'family'"
-        >
+          *ngIf="formSelecionado === 'family'">
           <div class="row">
             <div class="col-sm-12 col-md-6">
               <input
@@ -283,12 +271,10 @@
                 [class.is-invalid]="
                   formFamilia.get('nome')?.touched &&
                   formFamilia.get('nome')?.invalid
-                "
-              />
+                " />
               <div
                 class="invalid-feedback"
-                *ngIf="formFamilia.get('nome')?.errors?.['required']"
-              >
+                *ngIf="formFamilia.get('nome')?.errors?.['required']">
                 Nome é obrigatório.
               </div>
             </div>
@@ -301,12 +287,10 @@
                 [class.is-invalid]="
                   formFamilia.get('cpf')?.touched &&
                   formFamilia.get('cpf')?.invalid
-                "
-              />
+                " />
               <div
                 class="invalid-feedback"
-                *ngIf="formFamilia.get('cpf')?.errors?.['required']"
-              >
+                *ngIf="formFamilia.get('cpf')?.errors?.['required']">
                 CPF é obrigatório.
               </div>
             </div>
@@ -322,15 +306,13 @@
                 [class.is-invalid]="
                   formFamilia.get('email')?.touched &&
                   formFamilia.get('email')?.invalid
-                "
-              />
+                " />
               <div
                 class="invalid-feedback"
                 *ngIf="
                   formFamilia.get('email')?.touched &&
                   formFamilia.get('email')?.errors
-                "
-              >
+                ">
                 <div *ngIf="formFamilia.get('email')?.errors?.['required']">
                   Email é obrigatório.
                 </div>
@@ -343,38 +325,19 @@
             <div class="col-sm-12 col-md-6">
               <input
                 type="tel"
-                formControlName="telefone"
+                formControlName="celular"
                 class="form-control mb-3"
-                placeholder="Telefone"
+                placeholder="Celular"
                 [class.is-invalid]="
-                  formFamilia.get('telefone')?.touched &&
-                  formFamilia.get('telefone')?.invalid
-                "
-              />
+                  formFamilia.get('celular')?.touched &&
+                  formFamilia.get('celular')?.invalid
+                " />
               <div
                 class="invalid-feedback"
-                *ngIf="formFamilia.get('telefone')?.errors?.['required']"
-              >
-                Telefone é obrigatório.
+                *ngIf="formFamilia.get('celular')?.errors?.['required']">
+                Celular é obrigatório.
               </div>
             </div>
-          </div>
-
-          <input
-            type="text"
-            formControlName="endereco"
-            class="form-control mb-3"
-            placeholder="Endereço Completo"
-            [class.is-invalid]="
-              formFamilia.get('endereco')?.touched &&
-              formFamilia.get('endereco')?.invalid
-            "
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="formFamilia.get('endereco')?.errors?.['required']"
-          >
-            Endereço é obrigatório.
           </div>
 
           <div class="row"></div>
@@ -390,12 +353,10 @@
                 [class.is-invalid]="
                   formFamilia.get('renda')?.touched &&
                   formFamilia.get('renda')?.invalid
-                "
-              />
+                " />
               <div
                 class="invalid-feedback"
-                *ngIf="formFamilia.get('renda')?.errors"
-              >
+                *ngIf="formFamilia.get('renda')?.errors">
                 <div *ngIf="formFamilia.get('renda')?.errors?.['required']">
                   Campo obrigatório.
                 </div>
@@ -414,12 +375,10 @@
                 [class.is-invalid]="
                   formFamilia.get('moradores')?.touched &&
                   formFamilia.get('moradores')?.invalid
-                "
-              />
+                " />
               <div
                 class="invalid-feedback"
-                *ngIf="formFamilia.get('moradores')?.errors"
-              >
+                *ngIf="formFamilia.get('moradores')?.errors">
                 <div *ngIf="formFamilia.get('moradores')?.errors?.['required']">
                   Campo obrigatório.
                 </div>
@@ -438,12 +397,10 @@
                 [class.is-invalid]="
                   formFamilia.get('energia')?.touched &&
                   formFamilia.get('energia')?.invalid
-                "
-              />
+                " />
               <div
                 class="invalid-feedback"
-                *ngIf="formFamilia.get('energia')?.errors"
-              >
+                *ngIf="formFamilia.get('energia')?.errors">
                 <div *ngIf="formFamilia.get('energia')?.errors?.['required']">
                   Campo obrigatório.
                 </div>
@@ -461,13 +418,11 @@
             [class.is-invalid]="
               formFamilia.get('vulnerabilidade')?.touched &&
               formFamilia.get('vulnerabilidade')?.invalid
-            "
-          ></textarea>
+            "></textarea>
 
           <div
             class="invalid-feedback"
-            *ngIf="formFamilia.get('vulnerabilidade')?.errors?.['required']"
-          >
+            *ngIf="formFamilia.get('vulnerabilidade')?.errors?.['required']">
             Descreva a situação de vulnerabilidade.
           </div>
 
@@ -481,12 +436,10 @@
                 [class.is-invalid]="
                   formFamilia.get('senha')?.touched &&
                   formFamilia.get('senha')?.invalid
-                "
-              />
+                " />
               <div
                 class="invalid-feedback"
-                *ngIf="formFamilia.get('senha')?.errors"
-              >
+                *ngIf="formFamilia.get('senha')?.errors">
                 <div *ngIf="formFamilia.get('senha')?.errors?.['required']">
                   Senha é obrigatória.
                 </div>
@@ -507,12 +460,10 @@
                 [class.is-invalid]="
                   formFamilia.get('confirmarSenha')?.touched &&
                   formFamilia.get('confirmarSenha')?.invalid
-                "
-              />
+                " />
               <div
                 class="invalid-feedback"
-                *ngIf="formFamilia.get('confirmarSenha')?.errors?.['required']"
-              >
+                *ngIf="formFamilia.get('confirmarSenha')?.errors?.['required']">
                 Confirmação obrigatória.
               </div>
             </div>
@@ -523,8 +474,7 @@
               class="form-check-input"
               type="checkbox"
               formControlName="termos"
-              id="termos-familia"
-            />
+              id="termos-familia" />
             <label class="form-check-label" for="termos-familia"
               >Concordo com os Termos</label
             >
@@ -533,8 +483,7 @@
               *ngIf="
                 formFamilia.get('termos')?.touched &&
                 formFamilia.get('termos')?.invalid
-              "
-            >
+              ">
               Você deve aceitar os termos.
             </div>
           </div>

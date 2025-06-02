@@ -55,7 +55,6 @@ export class EditarComponent {
   }
 
   onSubmit() {
-    debugger;
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;

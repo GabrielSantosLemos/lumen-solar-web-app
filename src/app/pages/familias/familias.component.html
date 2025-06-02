@@ -1,7 +1,6 @@
 <div class="container">
   <div class="mb-4">
     <h3>Família</h3>
-    <div>Nome responsável</div>
   </div>
   <nav ngbNav #nav="ngbNav" class="nav-tabs" [activeId]="1">
     <ng-container ngbNavItem [ngbNavItem]="0">
@@ -21,10 +20,10 @@
           Status:
           <span class="badge rounded-pill text-bg-warning">{{
             familia?.status === 1
-              ? "Em Analise"
+              ? 'Em Analise'
               : familia?.status === 2
-              ? "Apto"
-              : ""
+              ? 'Apto'
+              : ''
           }}</span>
         </div>
       </ng-template>

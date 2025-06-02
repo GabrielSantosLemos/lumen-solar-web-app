@@ -88,6 +88,8 @@ export class LayoutComponent implements OnInit {
       this.router.navigate([`/familias/${id}`]);
     } else if (roles.includes('doador')) {
       this.router.navigate([`/doadores/${id}`]);
+    } else if (roles.includes('admin')) {
+      this.router.navigate([`/admin`]);
     } else {
       this.router.navigate(['/']);
     }

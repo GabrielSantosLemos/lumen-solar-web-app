@@ -15,18 +15,18 @@
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ familia.nomeResponsavel }}</td>
       <td>{{ familia.cpf }}</td>
-      <td>{{ familia.rendaFamiliar | currency : "BRL" }}</td>
+      <td>{{ familia.rendaFamiliar | currency : 'BRL' }}</td>
       <td>{{ familia.numeroMoradores }}</td>
-      <td>{{ familia.gastoComEnergia | currency : "BRL" }}</td>
+      <td>{{ familia.gastoComEnergia | currency : 'BRL' }}</td>
       <td>
-        <span
-          [ngClass]="{
-            'text-success': familia.status === 1,
-            'text-danger': familia.status === 0
-          }"
-        >
-          {{ familia.status === 1 ? "Ativa" : "Inativa" }}
-        </span>
+        Status:
+        <span class="badge rounded-pill text-bg-warning">{{
+          familia?.status === 1
+            ? 'Em Analise'
+            : familia?.status === 2
+            ? 'Apto'
+            : ''
+        }}</span>
       </td>
     </tr>
   </tbody>

@@ -132,6 +132,10 @@ export class AccountsComponent {
             this.router
               .navigate([`/doadores/${id}`])
               .then(() => this._activeModal.close());
+          } else if (roles.includes('admin')) {
+            this.router
+              .navigate([`/admin`])
+              .then(() => this._activeModal.close());
           } else {
             this.router.navigate(['/']);
           }

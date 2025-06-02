@@ -16,6 +16,7 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
+    debugger;
     const userData = localStorage.getItem('USER');
 
     if (!userData) {
@@ -39,7 +40,7 @@ export class AuthGuard implements CanActivate {
         const requiredRole = routeRoleMap[routePrefix];
 
         if (!roles.includes(requiredRole)) {
-          this.router.navigate(['/'], { queryParams: { login: 'true' } });
+          this.router.navigate(['/']);
           return false;
         }
       }

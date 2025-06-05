@@ -107,6 +107,24 @@ export class AccountsComponent {
   atualizarTipoDoador(event: Event) {
     const value = (event.target as HTMLSelectElement).value;
     this.doadorTipo = Number(value);
+
+    if (this.doadorTipo === 1) {
+      // F
+      this.formDoador.controls.cpf.addValidators([Validators.required]);
+
+      this.formDoador.controls.empresa.removeValidators([Validators.required]);
+      this.formDoador.controls.cnpj.removeValidators([Validators.required]);
+    } else {
+      this.formDoador.controls.cpf.removeValidators([Validators.required]);
+
+      this.formDoador.controls.empresa.addValidators([Validators.required]);
+      this.formDoador.controls.cnpj.addValidators([Validators.required]);
+      // J
+    }
+
+    this.formDoador.controls.cpf.updateValueAndValidity();
+    this.formDoador.controls.cnpj.updateValueAndValidity();
+    this.formDoador.controls.empresa.updateValueAndValidity();
   }
 
   onFechar() {

@@ -88,129 +88,179 @@
           [formGroup]="formDoador"
           (ngSubmit)="onSubmitDoador()"
           *ngIf="formSelecionado === 'doador'">
-          <input
-            type="text"
-            formControlName="nome"
-            class="form-control mb-3"
-            placeholder="Nome Completo"
-            [class.is-invalid]="
-              formDoador.get('nome')?.touched && formDoador.get('nome')?.invalid
-            " />
-          <div
-            class="invalid-feedback"
-            *ngIf="formDoador.get('nome')?.errors?.['required']">
-            Nome é obrigatório.
-          </div>
-
-          <input
-            type="email"
-            formControlName="email"
-            class="form-control mb-3"
-            placeholder="Email"
-            [class.is-invalid]="
-              formDoador.get('email')?.touched &&
-              formDoador.get('email')?.invalid
-            " />
-          <div
-            class="invalid-feedback"
-            *ngIf="
-              formDoador.get('email')?.touched &&
-              formDoador.get('email')?.errors
-            ">
-            <div *ngIf="formDoador.get('email')?.errors?.['required']">
-              Email é obrigatório.
-            </div>
-            <div *ngIf="formDoador.get('email')?.errors?.['email']">
-              Email inválido.
+          <div>
+            <input
+              type="text"
+              formControlName="nome"
+              class="form-control mb-3"
+              placeholder="Nome Completo"
+              [class.is-invalid]="
+                formDoador.get('nome')?.touched &&
+                formDoador.get('nome')?.invalid
+              " />
+            <div
+              class="invalid-feedback"
+              *ngIf="formDoador.get('nome')?.errors?.['required']">
+              Nome é obrigatório.
             </div>
           </div>
 
-          <input
-            formControlName="celular"
-            class="form-control mb-3"
-            placeholder="Celular"
-            mask="(00) 00000-0000" />
-
-          <input
-            type="text"
-            formControlName="cpf"
-            class="form-control mb-3"
-            placeholder="CPF"
-            [class.is-invalid]="
-              formDoador.get('cpf')?.touched && formDoador.get('cpf')?.invalid
-            "
-            mask="000.000.000-00" />
-          <div
-            class="invalid-feedback"
-            *ngIf="formDoador.get('cpf')?.errors?.['required']">
-            CPF é obrigatório.
+          <div>
+            <input
+              type="email"
+              formControlName="email"
+              class="form-control mb-3"
+              placeholder="Email"
+              [class.is-invalid]="
+                formDoador.get('email')?.touched &&
+                formDoador.get('email')?.invalid
+              " />
+            <div
+              class="invalid-feedback"
+              *ngIf="
+                formDoador.get('email')?.touched &&
+                formDoador.get('email')?.errors
+              ">
+              <div *ngIf="formDoador.get('email')?.errors?.['required']">
+                Email é obrigatório.
+              </div>
+              <div *ngIf="formDoador.get('email')?.errors?.['email']">
+                Email inválido.
+              </div>
+            </div>
           </div>
 
-          <select
-            type="number"
-            formControlName="tipo"
-            class="form-select mb-3"
-            (change)="atualizarTipoDoador($event)"
-            [class.is-invalid]="
-              formDoador.get('tipo')?.touched && formDoador.get('tipo')?.invalid
-            ">
-            <option [value]="null" disabled selected>Tipo de Doador</option>
-            <option [value]="1">Pessoa Física</option>
-            <option [value]="2">Pessoa Jurídica</option>
-          </select>
-          <div
-            class="invalid-feedback"
-            *ngIf="formDoador.get('tipo')?.errors?.['required']">
-            Tipo de doador é obrigatório.
+          <div>
+            <input
+              formControlName="celular"
+              class="form-control mb-3"
+              placeholder="Celular"
+              mask="(00) 00000-0000"
+              [class.is-invalid]="
+                formDoador.get('celular')?.touched &&
+                formDoador.get('celular')?.invalid
+              " />
+            <div
+              class="invalid-feedback"
+              *ngIf="formDoador.get('celular')?.errors?.['required']">
+              Nome é obrigatório.
+            </div>
+          </div>
+
+          <div>
+            <input
+              type="text"
+              formControlName="cpf"
+              class="form-control mb-3"
+              placeholder="CPF"
+              [class.is-invalid]="
+                formDoador.get('cpf')?.touched && formDoador.get('cpf')?.invalid
+              "
+              mask="000.000.000-00" />
+            <div
+              class="invalid-feedback"
+              *ngIf="formDoador.get('cpf')?.errors?.['required']">
+              CPF é obrigatório.
+            </div>
+          </div>
+
+          <div>
+            <select
+              type="number"
+              formControlName="tipo"
+              class="form-select mb-3"
+              (change)="atualizarTipoDoador($event)"
+              [class.is-invalid]="
+                formDoador.get('tipo')?.touched &&
+                formDoador.get('tipo')?.invalid
+              ">
+              <option [value]="null" disabled selected>Tipo de Doador</option>
+              <option [value]="1">Pessoa Física</option>
+              <option [value]="2">Pessoa Jurídica</option>
+            </select>
+            <div
+              class="invalid-feedback"
+              *ngIf="formDoador.get('tipo')?.errors?.['required']">
+              Tipo de doador é obrigatório.
+            </div>
           </div>
 
           <div *ngIf="doadorTipo === 2">
-            <input
-              type="text"
-              formControlName="empresa"
-              class="form-control mb-3"
-              placeholder="Nome da Empresa" />
-            <input
-              type="text"
-              formControlName="cnpj"
-              class="form-control mb-3"
-              placeholder="CNPJ"
-              mask="00.000.000/0000-00" />
+            <div>
+              <input
+                type="text"
+                formControlName="empresa"
+                class="form-control mb-3"
+                placeholder="Nome da Empresa"
+                [class.is-invalid]="
+                  formDoador.get('empresa')?.touched &&
+                  formDoador.get('empresa')?.invalid
+                " />
+              <div
+                class="invalid-feedback"
+                *ngIf="formDoador.get('empresa')?.errors?.['required']">
+                Nome é obrigatório.
+              </div>
+            </div>
+
+            <div>
+              <input
+                type="text"
+                formControlName="cnpj"
+                class="form-control mb-3"
+                placeholder="CNPJ"
+                mask="00.000.000/0000-00"
+                [class.is-invalid]="
+                  formDoador.get('cnpj')?.touched &&
+                  formDoador.get('cnpj')?.invalid
+                " />
+              <div
+                class="invalid-feedback"
+                *ngIf="formDoador.get('cnpj')?.errors?.['required']">
+                Nome é obrigatório.
+              </div>
+            </div>
           </div>
 
-          <input
-            type="password"
-            formControlName="senha"
-            class="form-control mb-3"
-            placeholder="Senha"
-            [class.is-invalid]="
-              formDoador.get('senha')?.touched &&
-              formDoador.get('senha')?.invalid
-            " />
-          <div class="invalid-feedback" *ngIf="formDoador.get('senha')?.errors">
-            <div *ngIf="formDoador.get('senha')?.errors?.['required']">
-              Senha é obrigatória.
-            </div>
-            <div *ngIf="formDoador.get('senha')?.errors?.['minlength']">
-              Senha deve ter no mínimo
-              {{ formDoador.get('senha')?.errors?.['minlength'].requiredLength }}
-              caracteres.
+          <div>
+            <input
+              type="password"
+              formControlName="senha"
+              class="form-control mb-3"
+              placeholder="Senha"
+              [class.is-invalid]="
+                formDoador.get('senha')?.touched &&
+                formDoador.get('senha')?.invalid
+              " />
+            <div
+              class="invalid-feedback"
+              *ngIf="formDoador.get('senha')?.errors">
+              <div *ngIf="formDoador.get('senha')?.errors?.['required']">
+                Senha é obrigatória.
+              </div>
+              <div *ngIf="formDoador.get('senha')?.errors?.['minlength']">
+                Senha deve ter no mínimo
+                {{ formDoador.get('senha')?.errors?.['minlength'].requiredLength }}
+                caracteres.
+              </div>
             </div>
           </div>
 
-          <input
-            type="password"
-            formControlName="confirmarSenha"
-            class="form-control mb-3"
-            placeholder="Confirme a Senha"
-            [class.is-invalid]="
-              formDoador.get('confirmarSenha')?.touched &&
-              formDoador.get('confirmarSenha')?.invalid
-            " />
-          <div
-            class="invalid-feedback"
-            *ngIf="formDoador.get('confirmarSenha')?.errors?.['required']">
-            Confirmação obrigatória.
+          <div>
+            <input
+              type="password"
+              formControlName="confirmarSenha"
+              class="form-control mb-3"
+              placeholder="Confirme a Senha"
+              [class.is-invalid]="
+                formDoador.get('confirmarSenha')?.touched &&
+                formDoador.get('confirmarSenha')?.invalid
+              " />
+            <div
+              class="invalid-feedback"
+              *ngIf="formDoador.get('confirmarSenha')?.errors?.['required']">
+              Confirmação obrigatória.
+            </div>
           </div>
 
           <div class="form-check mb-3">

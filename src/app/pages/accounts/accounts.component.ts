@@ -11,6 +11,8 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxCurrencyDirective } from 'ngx-currency';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { environment } from 'src/environments/environment.prod';
 
 @Component({
@@ -22,7 +24,11 @@ import { environment } from 'src/environments/environment.prod';
     NgbNavModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxCurrencyDirective,
+    NgxMaskDirective,
+    NgxMaskPipe,
   ],
+  providers: [provideNgxMask()],
   templateUrl: './accounts.component.html',
   styleUrls: ['./accounts.component.scss'],
 })
@@ -33,7 +39,7 @@ export class AccountsComponent {
   private router = inject(Router);
 
   tabAtiva: 'login' | 'register' = 'login';
-  formSelecionado: 'donor' | 'family' | null = null;
+  formSelecionado: 'doador' | 'familia' | null = null;
   doadorTipo = 0;
   erro: string | null = null;
 
@@ -45,8 +51,8 @@ export class AccountsComponent {
   formDoador = new FormGroup({
     nome: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
-    celular: new FormControl(''),
-    cpf: new FormControl('', Validators.required),
+    celular: new FormControl('', Validators.required),
+    cpf: new FormControl(''),
     tipo: new FormControl<number | null>(1, Validators.required),
     empresa: new FormControl(''),
     cnpj: new FormControl(''),
@@ -94,7 +100,7 @@ export class AccountsComponent {
     this.formSelecionado = null;
   }
 
-  selectForm(form: 'donor' | 'family') {
+  selectForm(form: 'doador' | 'familia') {
     this.formSelecionado = form;
   }
 
@@ -153,8 +159,6 @@ export class AccountsComponent {
       return;
     }
 
-    debugger;
-
     const value = this.formDoador.value;
 
     this._http
@@ -178,6 +182,8 @@ export class AccountsComponent {
           this.login(value);
         },
         error: error => {
+          debugger;
+
           console.error('Erro ao realizar cadastro familia', error);
         },
       });

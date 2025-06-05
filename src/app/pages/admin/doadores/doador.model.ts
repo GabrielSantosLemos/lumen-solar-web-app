@@ -1,4 +1,5 @@
 export interface Doador {
+  id: number;
   nomeCompleto: string;
   email: string;
   celular: string;

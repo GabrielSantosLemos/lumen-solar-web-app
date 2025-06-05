@@ -7,7 +7,6 @@
     (click)="onFechar()"></button>
 </div>
 
-<!-- Tabs -->
 <div class="modal-body">
   <nav ngbNav #nav="ngbNav" class="nav-tabs">
     <ng-container ngbNavItem>
@@ -27,7 +26,6 @@
               <div *ngIf="email.errors['email']">Email inválido.</div>
             </div>
           </div>
-
           <div class="mb-3">
             <label for="senha" class="form-label">Senha</label>
             <input
@@ -45,21 +43,7 @@
               </div>
             </div>
           </div>
-
-          <!-- Checkbox -->
-          <!-- <div class="mb-3 form-check">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="lembrar"
-              formControlName="lembrar"
-            />
-            <label class="form-check-label" for="lembrar">Lembrar de mim</label>
-          </div> -->
-
-          <!-- Botão -->
           <button type="submit" class="btn btn-primary w-100">Entrar</button>
-
           <div
             style="
               display: flex;
@@ -70,10 +54,6 @@
             *ngIf="erro">
             {{ erro }}
           </div>
-
-          <!-- <div class="text-center mt-3">
-            <a href="#" class="text-muted">Esqueceu sua senha?</a>
-          </div> -->
         </form>
       </ng-template>
     </ng-container>
@@ -85,31 +65,29 @@
             <button
               class="btn"
               [ngClass]="
-                formSelecionado === 'donor'
+                formSelecionado === 'doador'
                   ? 'btn-primary'
                   : 'btn-outline-primary'
               "
-              (click)="selectForm('donor')">
+              (click)="selectForm('doador')">
               <i class="fas fa-hand-holding-heart me-2"></i>Quero Doar
             </button>
             <button
               class="btn"
               [ngClass]="
-                formSelecionado === 'family'
+                formSelecionado === 'familia'
                   ? 'btn-primary'
                   : 'btn-outline-primary'
               "
-              (click)="selectForm('family')">
+              (click)="selectForm('familia')">
               <i class="fas fa-home me-2"></i>Sou Família
             </button>
           </div>
         </div>
-
-        <!-- Doador Form -->
         <form
           [formGroup]="formDoador"
           (ngSubmit)="onSubmitDoador()"
-          *ngIf="formSelecionado === 'donor'">
+          *ngIf="formSelecionado === 'doador'">
           <input
             type="text"
             formControlName="nome"
@@ -148,10 +126,10 @@
           </div>
 
           <input
-            type="tel"
             formControlName="celular"
             class="form-control mb-3"
-            placeholder="Celular" />
+            placeholder="Celular"
+            mask="(00) 00000-0000" />
 
           <input
             type="text"
@@ -160,7 +138,8 @@
             placeholder="CPF"
             [class.is-invalid]="
               formDoador.get('cpf')?.touched && formDoador.get('cpf')?.invalid
-            " />
+            "
+            mask="000.000.000-00" />
           <div
             class="invalid-feedback"
             *ngIf="formDoador.get('cpf')?.errors?.['required']">
@@ -168,6 +147,7 @@
           </div>
 
           <select
+            type="number"
             formControlName="tipo"
             class="form-select mb-3"
             (change)="atualizarTipoDoador($event)"
@@ -194,7 +174,8 @@
               type="text"
               formControlName="cnpj"
               class="form-control mb-3"
-              placeholder="CNPJ" />
+              placeholder="CNPJ"
+              mask="00.000.000/0000-00" />
           </div>
 
           <input
@@ -255,12 +236,10 @@
             Cadastrar como Doador
           </button>
         </form>
-
-        <!-- Familia Form -->
         <form
           [formGroup]="formFamilia"
           (ngSubmit)="onSubmitFamilia()"
-          *ngIf="formSelecionado === 'family'">
+          *ngIf="formSelecionado === 'familia'">
           <div class="row">
             <div class="col-sm-12 col-md-6">
               <input
@@ -287,7 +266,8 @@
                 [class.is-invalid]="
                   formFamilia.get('cpf')?.touched &&
                   formFamilia.get('cpf')?.invalid
-                " />
+                "
+                mask="000.000.000-00" />
               <div
                 class="invalid-feedback"
                 *ngIf="formFamilia.get('cpf')?.errors?.['required']">
@@ -324,14 +304,14 @@
 
             <div class="col-sm-12 col-md-6">
               <input
-                type="tel"
                 formControlName="celular"
                 class="form-control mb-3"
                 placeholder="Celular"
                 [class.is-invalid]="
                   formFamilia.get('celular')?.touched &&
                   formFamilia.get('celular')?.invalid
-                " />
+                "
+                mask="(00) 00000-0000" />
               <div
                 class="invalid-feedback"
                 *ngIf="formFamilia.get('celular')?.errors?.['required']">
@@ -340,20 +320,18 @@
             </div>
           </div>
 
-          <div class="row"></div>
-          <div class="col-sm-12 col-md-6"></div>
-
           <div class="row">
             <div class="col-sm-12 col-md-4">
               <input
-                type="number"
                 formControlName="renda"
                 class="form-control mb-3"
                 placeholder="Renda Familiar (R$)"
                 [class.is-invalid]="
                   formFamilia.get('renda')?.touched &&
                   formFamilia.get('renda')?.invalid
-                " />
+                "
+                currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" />
               <div
                 class="invalid-feedback"
                 *ngIf="formFamilia.get('renda')?.errors">
@@ -390,14 +368,15 @@
 
             <div class="col-sm-12 col-md-4">
               <input
-                type="number"
                 formControlName="energia"
                 class="form-control mb-3"
                 placeholder="Gasto com Energia (R$)"
                 [class.is-invalid]="
                   formFamilia.get('energia')?.touched &&
                   formFamilia.get('energia')?.invalid
-                " />
+                "
+                currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" />
               <div
                 class="invalid-feedback"
                 *ngIf="formFamilia.get('energia')?.errors">
@@ -495,6 +474,5 @@
       </ng-template>
     </ng-container>
   </nav>
-
   <div [ngbNavOutlet]="nav" class="mt-2"></div>
 </div>

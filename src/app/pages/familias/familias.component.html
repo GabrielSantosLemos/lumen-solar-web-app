@@ -6,26 +6,13 @@
     <ng-container ngbNavItem [ngbNavItem]="0">
       <button ngbNavLink>Ficha de Inscrição</button>
       <ng-template ngbNavContent>
-        <app-editar [familia]="familia"></app-editar>
+        <app-editar></app-editar>
       </ng-template>
     </ng-container>
     <ng-container ngbNavItem [ngbNavItem]="1">
       <a ngbNavLink>Situação do Auxílio</a>
       <ng-template ngbNavContent>
-        <div>CPF: {{ familia?.cpf }}</div>
-        <div>Renda Familias: {{ familia?.rendaFamiliar }}</div>
-        <div>Número de Moradores: {{ familia?.numeroMoradores }}</div>
-        <div>Gasto com Energia (R$): {{ familia?.gastoComEnergia }}</div>
-        <div>
-          Status:
-          <span class="badge rounded-pill text-bg-warning">{{
-            familia?.status === 1
-              ? 'Em Analise'
-              : familia?.status === 2
-              ? 'Apto'
-              : ''
-          }}</span>
-        </div>
+        <app-situacao></app-situacao>
       </ng-template>
     </ng-container>
   </nav>

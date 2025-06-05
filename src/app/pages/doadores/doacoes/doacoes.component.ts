@@ -24,7 +24,7 @@ export class DoacoesComponent {
   ) {}
 
   ngOnInit() {
-    this._activateRoute.params.subscribe((param) => {
+    this._activateRoute.params.subscribe(param => {
       if (param['id']) {
         this.id = Number(param['id']);
         this.atualizar();
@@ -51,10 +51,10 @@ export class DoacoesComponent {
     this._http
       .get<Doacao[]>(`${this.baseUrl}/doadores/${this.id}/doacoes`)
       .subscribe({
-        next: (data) => {
+        next: data => {
           this.doacoes = data;
         },
-        error: (error) => {
+        error: error => {
           console.error('Erro ao buscar doador:', error);
         },
       });

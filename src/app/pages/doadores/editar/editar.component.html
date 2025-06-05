@@ -6,12 +6,10 @@
     placeholder="Nome Completo"
     [class.is-invalid]="
       form.get('nomeCompleto')?.touched && form.get('nomeCompleto')?.invalid
-    "
-  />
+    " />
   <div
     class="invalid-feedback"
-    *ngIf="form.get('nomeCompleto')?.errors?.['required']"
-  >
+    *ngIf="form.get('nomeCompleto')?.errors?.['required']">
     Nome é obrigatório.
   </div>
 
@@ -22,12 +20,10 @@
     placeholder="Email"
     [class.is-invalid]="
       form.get('email')?.touched && form.get('email')?.invalid
-    "
-  />
+    " />
   <div
     class="invalid-feedback"
-    *ngIf="form.get('email')?.touched && form.get('email')?.errors"
-  >
+    *ngIf="form.get('email')?.touched && form.get('email')?.errors">
     <div *ngIf="form.get('email')?.errors?.['required']">
       Email é obrigatório.
     </div>
@@ -35,30 +31,31 @@
   </div>
 
   <input
-    type="tel"
     formControlName="celular"
     class="form-control mb-3"
     placeholder="Celular"
-  />
+    mask="(00) 00000-0000" />
 
-  <input
-    type="text"
-    formControlName="cpf"
-    class="form-control mb-3"
-    placeholder="CPF"
-    [class.is-invalid]="form.get('cpf')?.touched && form.get('cpf')?.invalid"
-  />
-  <div class="invalid-feedback" *ngIf="form.get('cpf')?.errors?.['required']">
-    CPF é obrigatório.
-  </div>
+  <ng-container *ngIf="doadorTipo === 1">
+    <input
+      type="text"
+      formControlName="cpf"
+      class="form-control mb-3"
+      placeholder="CPF"
+      [class.is-invalid]="form.get('cpf')?.touched && form.get('cpf')?.invalid"
+      mask="000.000.000-00" />
+    <div class="invalid-feedback" *ngIf="form.get('cpf')?.errors?.['required']">
+      CPF é obrigatório.
+    </div>
+  </ng-container>
 
   <select
+    type="number"
     formControlName="tipo"
     class="form-select mb-3"
     (change)="atualizarTipoDoador($event)"
-    [class.is-invalid]="form.get('tipo')?.touched && form.get('tipo')?.invalid"
-  >
-    <option value="" disabled selected>Tipo de Doador</option>
+    [class.is-invalid]="form.get('tipo')?.touched && form.get('tipo')?.invalid">
+    <option [value]="null" disabled selected>Tipo de Doador</option>
     <option [value]="1">Pessoa Física</option>
     <option [value]="2">Pessoa Jurídica</option>
   </select>
@@ -71,14 +68,13 @@
       type="text"
       formControlName="nomeEmpresa"
       class="form-control mb-3"
-      placeholder="Nome da Empresa"
-    />
+      placeholder="Nome da Empresa" />
     <input
       type="text"
       formControlName="cnpj"
       class="form-control mb-3"
       placeholder="CNPJ"
-    />
+      mask="00.000.000/0000-00" />
   </div>
 
   <div style="display: flex; justify-content: end">

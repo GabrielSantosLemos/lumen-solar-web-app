@@ -8,11 +8,13 @@
       <th scope="col">Moradores</th>
       <th scope="col">Gasto com Energia</th>
       <th scope="col">Status</th>
+      <th scope="col">Uf</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let familia of familias; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
+      <th scope="row">{{ familia.id }}</th>
       <td>{{ familia.nomeResponsavel }}</td>
       <td>{{ familia.cpf }}</td>
       <td>{{ familia.rendaFamiliar | currency : 'BRL' }}</td>
@@ -20,13 +22,38 @@
       <td>{{ familia.gastoComEnergia | currency : 'BRL' }}</td>
       <td>
         Status:
-        <span class="badge rounded-pill text-bg-warning">{{
-          familia?.status === 1
-            ? 'Em Analise'
-            : familia?.status === 2
-            ? 'Apto'
-            : ''
-        }}</span>
+        <span
+          class="badge rounded-pill"
+          [ngClass]="{
+            'text-bg-warning': familia?.status === 1,
+            'text-bg-success': familia?.status === 2,
+            'text-bg-danger': familia?.status === 3
+          }">
+          {{
+            familia?.status === 1
+              ? 'Em Análise'
+              : familia?.status === 2
+              ? 'Apto'
+              : familia?.status === 3
+              ? 'Não Aprovado'
+              : ''
+          }}
+        </span>
+      </td>
+      <td>{{ familia.endereco.uf }}</td>
+      <td>
+        <button
+          class="btn btn-outline-primary"
+          type="button"
+          (click)="status(familia.id, familia.status)">
+          Atualizar Status
+        </button>
+        <button
+          class="btn btn-outline-danger"
+          type="button"
+          (click)="excluir(familia.id)">
+          Excluir
+        </button>
       </td>
     </tr>
   </tbody>

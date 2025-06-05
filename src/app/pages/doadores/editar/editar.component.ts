@@ -21,7 +21,7 @@ export class EditarComponent {
     nomeCompleto: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     celular: new FormControl(''),
-    tipo: new FormControl(0, Validators.required),
+    tipo: new FormControl<number | null>(null, Validators.required),
     cpf: new FormControl(''),
     nomeEmpresa: new FormControl(''),
     cnpj: new FormControl(''),
@@ -33,13 +33,15 @@ export class EditarComponent {
   ) {}
 
   ngOnInit() {
-    this._activateRoute.params.subscribe((param) => {
+    this.form.controls.tipo.disable();
+
+    this._activateRoute.params.subscribe(param => {
       if (param['id']) {
         this.id = Number(param['id']);
         this._http
           .get<Doador>(`${this.baseUrl}/doadores/${this.id}`)
           .subscribe({
-            next: (data) => {
+            next: data => {
               this.doador = data;
               this.form.patchValue({
                 nomeCompleto: this.doador.nomeCompleto,
@@ -53,7 +55,7 @@ export class EditarComponent {
 
               this.doadorTipo = this.doador.tipo;
             },
-            error: (error) => {
+            error: error => {
               console.error('Erro ao buscar doador:', error);
             },
           });

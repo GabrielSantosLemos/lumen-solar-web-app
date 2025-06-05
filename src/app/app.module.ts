@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,7 +8,23 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { TermosDeUsoComponent } from './pages/termos-de-uso/termos-de-uso.component';
 import { PoliticaDePrivacidadeComponent } from './pages/politica-de-privacidade/politica-de-privacidade.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule,
+} from '@angular/common/http';
+import { APIInterceptor } from './http.interceptor';
+import { registerLocaleData } from '@angular/common';
+import ptBr from '@angular/common/locales/pt';
+import {
+  NgxMaskDirective,
+  NgxMaskPipe,
+  provideEnvironmentNgxMask,
+  provideNgxMask,
+} from 'ngx-mask';
+import { NgxCurrencyDirective } from 'ngx-currency';
+
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -23,8 +39,16 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     NgbModule,
     HighchartsChartModule,
     HttpClientModule,
+    NgxCurrencyDirective,
+    NgxMaskDirective,
+    NgxMaskPipe,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: APIInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'pt' },
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
+    provideNgxMask(),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

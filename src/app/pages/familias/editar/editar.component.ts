@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Familia } from '../../admin/familias/familia.model';
 import { environment } from 'src/environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-editar',
@@ -12,7 +13,8 @@ import { HttpClient } from '@angular/common/http';
 export class EditarComponent {
   readonly baseUrl = environment.baseUrl;
 
-  @Input() familia: Familia | null = null;
+  id: number | null = null;
+  familia: Familia | null = null;
 
   form = new FormGroup({
     nomeResponsavel: new FormControl('', Validators.required),
@@ -37,21 +39,37 @@ export class EditarComponent {
     cidade: new FormControl('...'),
   });
 
-  constructor(private _http: HttpClient) {}
+  constructor(
+    private _http: HttpClient,
+    private _activateRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    if (this.familia) {
-      this.form.patchValue({
-        nomeResponsavel: this.familia.nomeResponsavel,
-        email: this.familia.user.email,
-        celular: this.familia.celular,
-        cpf: this.familia.cpf,
-        numeroMoradores: this.familia.numeroMoradores,
-        rendaFamiliar: this.familia.rendaFamiliar,
-        gastoComEnergia: this.familia.gastoComEnergia,
-        situacaoVulnerabilidade: this.familia.situacaoVulnerabilidade,
-      });
-    }
+    this._activateRoute.params.subscribe(param => {
+      if (param['id']) {
+        this.id = Number(param['id']);
+        this._http
+          .get<Familia>(`${this.baseUrl}/familias/${this.id}`)
+          .subscribe({
+            next: data => {
+              this.familia = data;
+              this.form.patchValue({
+                nomeResponsavel: data.nomeResponsavel,
+                email: data.user.email,
+                celular: data.celular,
+                cpf: data.cpf,
+                numeroMoradores: data.numeroMoradores,
+                rendaFamiliar: data.rendaFamiliar,
+                gastoComEnergia: data.gastoComEnergia,
+                situacaoVulnerabilidade: data.situacaoVulnerabilidade,
+              });
+            },
+            error: error => {
+              console.error('Erro ao buscar familia:', error);
+            },
+          });
+      }
+    });
   }
 
   onSubmit() {
@@ -63,7 +81,7 @@ export class EditarComponent {
     if (this.familia) {
       this._http
         .put(`${this.baseUrl}/familias/${this.familia.id}`, this.form.value)
-        .subscribe();
+        .subscribe(() => {});
     }
   }
 }

@@ -8,6 +8,13 @@ import { EditarComponent } from './editar/editar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DoacoesComponent } from './doacoes/doacoes.component';
 import { DoarComponent } from './doacoes/doar/doar.component';
+import {
+  NgxMaskDirective,
+  NgxMaskPipe,
+  provideEnvironmentNgxMask,
+  provideNgxMask,
+} from 'ngx-mask';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 @NgModule({
   declarations: [
@@ -22,6 +29,10 @@ import { DoarComponent } from './doacoes/doar/doar.component';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxCurrencyDirective,
+    NgxMaskDirective,
+    NgxMaskPipe,
   ],
+  providers: [provideNgxMask()],
 })
 export class DoadoresModule {}

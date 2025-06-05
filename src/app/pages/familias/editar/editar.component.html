@@ -9,12 +9,10 @@
         [class.is-invalid]="
           form.get('nomeResponsavel')?.touched &&
           form.get('nomeResponsavel')?.invalid
-        "
-      />
+        " />
       <div
         class="invalid-feedback"
-        *ngIf="form.get('nomeResponsavel')?.errors?.['required']"
-      >
+        *ngIf="form.get('nomeResponsavel')?.errors?.['required']">
         Nome é obrigatório.
       </div>
     </div>
@@ -27,11 +25,10 @@
         [class.is-invalid]="
           form.get('cpf')?.touched && form.get('cpf')?.invalid
         "
-      />
+        mask="000.000.000-00" />
       <div
         class="invalid-feedback"
-        *ngIf="form.get('cpf')?.errors?.['required']"
-      >
+        *ngIf="form.get('cpf')?.errors?.['required']">
         CPF é obrigatório.
       </div>
     </div>
@@ -46,12 +43,10 @@
         placeholder="Email"
         [class.is-invalid]="
           form.get('email')?.touched && form.get('email')?.invalid
-        "
-      />
+        " />
       <div
         class="invalid-feedback"
-        *ngIf="form.get('email')?.touched && form.get('email')?.errors"
-      >
+        *ngIf="form.get('email')?.touched && form.get('email')?.errors">
         <div *ngIf="form.get('email')?.errors?.['required']">
           Email é obrigatório.
         </div>
@@ -68,11 +63,10 @@
         [class.is-invalid]="
           form.get('celular')?.touched && form.get('celular')?.invalid
         "
-      />
+        mask="(00) 00000-0000" />
       <div
         class="invalid-feedback"
-        *ngIf="form.get('celular')?.errors?.['required']"
-      >
+        *ngIf="form.get('celular')?.errors?.['required']">
         Celular é obrigatório.
       </div>
     </div>
@@ -97,7 +91,6 @@
   <div class="row">
     <div class="col-sm-12 col-md-4">
       <input
-        type="number"
         formControlName="rendaFamiliar"
         class="form-control mb-3"
         placeholder="Renda Familiar (R$)"
@@ -105,7 +98,8 @@
           form.get('rendaFamiliar')?.touched &&
           form.get('rendaFamiliar')?.invalid
         "
-      />
+        currencyMask
+        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" />
       <div class="invalid-feedback" *ngIf="form.get('rendaFamiliar')?.errors">
         <div *ngIf="form.get('rendaFamiliar')?.errors?.['required']">
           Campo obrigatório.
@@ -125,8 +119,7 @@
         [class.is-invalid]="
           form.get('numeroMoradores')?.touched &&
           form.get('numeroMoradores')?.invalid
-        "
-      />
+        " />
       <div class="invalid-feedback" *ngIf="form.get('numeroMoradores')?.errors">
         <div *ngIf="form.get('numeroMoradores')?.errors?.['required']">
           Campo obrigatório.
@@ -139,7 +132,6 @@
 
     <div class="col-sm-12 col-md-4">
       <input
-        type="number"
         formControlName="gastoComEnergia"
         class="form-control mb-3"
         placeholder="Gasto com Energia (R$)"
@@ -147,7 +139,8 @@
           form.get('gastoComEnergia')?.touched &&
           form.get('gastoComEnergia')?.invalid
         "
-      />
+        currencyMask
+        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" />
       <div class="invalid-feedback" *ngIf="form.get('gastoComEnergia')?.errors">
         <div *ngIf="form.get('gastoComEnergia')?.errors?.['required']">
           Campo obrigatório.
@@ -166,13 +159,11 @@
     [class.is-invalid]="
       form.get('situacaoVulnerabilidade')?.touched &&
       form.get('situacaoVulnerabilidade')?.invalid
-    "
-  ></textarea>
+    "></textarea>
 
   <div
     class="invalid-feedback"
-    *ngIf="form.get('situacaoVulnerabilidade')?.errors?.['required']"
-  >
+    *ngIf="form.get('situacaoVulnerabilidade')?.errors?.['required']">
     Descreva a situação de vulnerabilidade.
   </div>
 

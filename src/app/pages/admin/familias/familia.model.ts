@@ -12,4 +12,8 @@ export interface Familia {
   user: {
     email: string;
   };
+
+  endereco: {
+    uf: string;
+  };
 }

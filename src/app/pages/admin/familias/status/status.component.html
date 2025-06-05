@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Atualizar Status</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="onFechar()"></button>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-4">
+  <div class="mb-3">
+    <label for="status" class="form-label">Status</label>
+    <select
+      id="status"
+      class="form-select"
+      formControlName="status"
+      [class.is-invalid]="status.touched && status.invalid">
+      <option [ngValue]="null" disabled selected>Selecione o status</option>
+      <option [ngValue]="1">Em Análise</option>
+      <option [ngValue]="2">Apto</option>
+      <option [ngValue]="3">Não Aprovado</option>
+    </select>
+    <div class="invalid-feedback" *ngIf="status.touched && status.errors">
+      <div *ngIf="status.errors['required']">O status é obrigatório.</div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary w-100">Atualizar</button>
+</form>

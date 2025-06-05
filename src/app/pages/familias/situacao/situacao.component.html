@@ -1,0 +1,24 @@
+<div>CPF: {{ familia?.cpf }}</div>
+<div>Renda Familias: {{ familia?.rendaFamiliar }}</div>
+<div>Número de Moradores: {{ familia?.numeroMoradores }}</div>
+<div>Gasto com Energia (R$): {{ familia?.gastoComEnergia }}</div>
+<div>
+  Status:
+  <span
+    class="badge rounded-pill"
+    [ngClass]="{
+      'text-bg-warning': familia?.status === 1,
+      'text-bg-success': familia?.status === 2,
+      'text-bg-danger': familia?.status === 3
+    }">
+    {{
+      familia?.status === 1
+        ? 'Em Análise'
+        : familia?.status === 2
+        ? 'Apto'
+        : familia?.status === 3
+        ? 'Não Aprovado'
+        : ''
+    }}
+  </span>
+</div>

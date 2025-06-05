@@ -9,18 +9,27 @@
       <th scope="col">Tipo</th>
       <th scope="col">Nome da Empresa</th>
       <th scope="col">CNPJ</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let doador of doadores; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
+    <tr *ngFor="let doador of doadores">
+      <th scope="row">{{ doador.id }}</th>
       <td>{{ doador.nomeCompleto }}</td>
       <td>{{ doador.user.email }}</td>
       <td>{{ doador.celular }}</td>
-      <td>{{ doador.cpf || "—" }}</td>
+      <td>{{ doador.cpf || '—' }}</td>
       <td>{{ doador.tipo }}</td>
-      <td>{{ doador.nomeEmpresa || "—" }}</td>
-      <td>{{ doador.cnpj || "—" }}</td>
+      <td>{{ doador.nomeEmpresa || '—' }}</td>
+      <td>{{ doador.cnpj || '—' }}</td>
+      <td>
+        <button
+          class="btn btn-outline-danger"
+          type="button"
+          (click)="excluir(doador.id)">
+          Excluir
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

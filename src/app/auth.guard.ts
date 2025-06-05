@@ -16,7 +16,6 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    debugger;
     const userData = localStorage.getItem('USER');
 
     if (!userData) {

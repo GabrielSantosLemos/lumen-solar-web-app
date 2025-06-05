@@ -72,22 +72,6 @@
     </div>
   </div>
 
-  <!-- <input
-    type="text"
-    formControlName="endereco"
-    class="form-control mb-3"
-    placeholder="Endereço Completo"
-    [class.is-invalid]="
-      form.get('endereco')?.touched && form.get('endereco')?.invalid
-    "
-  />
-  <div
-    class="invalid-feedback"
-    *ngIf="form.get('endereco')?.errors?.['required']"
-  >
-    Endereço é obrigatório.
-  </div> -->
-
   <div class="row">
     <div class="col-sm-12 col-md-4">
       <input
@@ -148,6 +132,92 @@
         <div *ngIf="form.get('gastoComEnergia')?.errors?.['min']">
           Valor inválido.
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-4">
+      <input
+        type="text"
+        formControlName="cep"
+        class="form-control mb-3"
+        placeholder="CEP"
+        [class.is-invalid]="
+          form.get('cep')?.touched && form.get('cep')?.invalid
+        "
+        mask="00000-000" />
+      <div
+        class="invalid-feedback"
+        *ngIf="form.get('cep')?.errors?.['required']">
+        CEP é obrigatório.
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-8">
+      <input
+        type="text"
+        formControlName="rua"
+        class="form-control mb-3"
+        placeholder="Rua"
+        [class.is-invalid]="
+          form.get('rua')?.touched && form.get('rua')?.invalid
+        " />
+      <div
+        class="invalid-feedback"
+        *ngIf="form.get('rua')?.errors?.['required']">
+        Rua é obrigatória.
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <input
+        type="text"
+        formControlName="bairro"
+        class="form-control mb-3"
+        placeholder="Bairro"
+        [class.is-invalid]="
+          form.get('bairro')?.touched && form.get('bairro')?.invalid
+        " />
+      <div
+        class="invalid-feedback"
+        *ngIf="form.get('bairro')?.errors?.['required']">
+        Bairro é obrigatório.
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-4">
+      <input
+        type="text"
+        formControlName="cidade"
+        class="form-control mb-3"
+        placeholder="Cidade"
+        [class.is-invalid]="
+          form.get('cidade')?.touched && form.get('cidade')?.invalid
+        " />
+      <div
+        class="invalid-feedback"
+        *ngIf="form.get('cidade')?.errors?.['required']">
+        Cidade é obrigatória.
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-2">
+      <input
+        type="text"
+        formControlName="uf"
+        class="form-control mb-3 text-uppercase"
+        placeholder="UF"
+        maxlength="2"
+        [class.is-invalid]="
+          form.get('uf')?.touched && form.get('uf')?.invalid
+        " />
+      <div
+        class="invalid-feedback"
+        *ngIf="form.get('uf')?.errors?.['required']">
+        UF é obrigatória.
       </div>
     </div>
   </div>

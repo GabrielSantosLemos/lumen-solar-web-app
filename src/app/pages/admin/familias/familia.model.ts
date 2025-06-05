@@ -15,5 +15,9 @@ export interface Familia {
 
   endereco: {
     uf: string;
+    cep: string;
+    rua: string;
+    bairro: string;
+    cidade: string;
   };
 }

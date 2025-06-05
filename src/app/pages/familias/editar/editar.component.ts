@@ -62,6 +62,11 @@ export class EditarComponent {
                 rendaFamiliar: data.rendaFamiliar,
                 gastoComEnergia: data.gastoComEnergia,
                 situacaoVulnerabilidade: data.situacaoVulnerabilidade,
+                uf: data.endereco.uf,
+                cep: data.endereco.cep,
+                rua: data.endereco.rua,
+                bairro: data.endereco.bairro,
+                cidade: data.endereco.cidade,
               });
             },
             error: error => {

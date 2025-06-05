@@ -390,6 +390,97 @@
             </div>
           </div>
 
+          <div class="row">
+            <div class="col-sm-12 col-md-4">
+              <input
+                type="text"
+                formControlName="cep"
+                class="form-control mb-3"
+                placeholder="CEP"
+                [class.is-invalid]="
+                  formFamilia.get('cep')?.touched &&
+                  formFamilia.get('cep')?.invalid
+                "
+                mask="00000-000" />
+              <div
+                class="invalid-feedback"
+                *ngIf="formFamilia.get('cep')?.errors?.['required']">
+                CEP é obrigatório.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-8">
+              <input
+                type="text"
+                formControlName="rua"
+                class="form-control mb-3"
+                placeholder="Rua"
+                [class.is-invalid]="
+                  formFamilia.get('rua')?.touched &&
+                  formFamilia.get('rua')?.invalid
+                " />
+              <div
+                class="invalid-feedback"
+                *ngIf="formFamilia.get('rua')?.errors?.['required']">
+                Rua é obrigatória.
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <input
+                type="text"
+                formControlName="bairro"
+                class="form-control mb-3"
+                placeholder="Bairro"
+                [class.is-invalid]="
+                  formFamilia.get('bairro')?.touched &&
+                  formFamilia.get('bairro')?.invalid
+                " />
+              <div
+                class="invalid-feedback"
+                *ngIf="formFamilia.get('bairro')?.errors?.['required']">
+                Bairro é obrigatório.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-4">
+              <input
+                type="text"
+                formControlName="cidade"
+                class="form-control mb-3"
+                placeholder="Cidade"
+                [class.is-invalid]="
+                  formFamilia.get('cidade')?.touched &&
+                  formFamilia.get('cidade')?.invalid
+                " />
+              <div
+                class="invalid-feedback"
+                *ngIf="formFamilia.get('cidade')?.errors?.['required']">
+                Cidade é obrigatória.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-2">
+              <input
+                type="text"
+                formControlName="uf"
+                class="form-control mb-3 text-uppercase"
+                placeholder="UF"
+                maxlength="2"
+                [class.is-invalid]="
+                  formFamilia.get('uf')?.touched &&
+                  formFamilia.get('uf')?.invalid
+                " />
+              <div
+                class="invalid-feedback"
+                *ngIf="formFamilia.get('uf')?.errors?.['required']">
+                UF é obrigatória.
+              </div>
+            </div>
+          </div>
+
           <textarea
             class="form-control mb-3"
             formControlName="vulnerabilidade"
